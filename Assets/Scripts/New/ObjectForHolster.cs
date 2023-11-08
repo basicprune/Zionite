@@ -33,10 +33,12 @@ public class ObjectForHolster : MonoBehaviour
 
 
 
-
-
+    
+    private Transform myTransform;
     void Start()
     {
+        myTransform = gameObject.GetComponent<Transform>();
+        myTransform = gameObject.transform;
         Grip.Enable();
         forHolsterCollider = gameObject.GetComponent<Collider>();
         GrabI = gameObject.GetComponent<XRGrabInteractable>();
@@ -67,10 +69,11 @@ public class ObjectForHolster : MonoBehaviour
 	}
 	public void OnTriggerExit(Collider other)
 	{
-       
+        
         BeltScript = null;
         HolsterObject = null;
         inHolster = false;
+        
 	}
    
 	public void GrabRelease()
@@ -157,7 +160,8 @@ public class ObjectForHolster : MonoBehaviour
         {
             ReleasedInHolster = false;
             inHolster = false;
-            gameObject.transform.SetParent(ObjForHolsterParent.transform); 
+            gameObject.transform.SetParent(ObjForHolsterParent.transform);
+            gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
         if (BeltScript == true)
 		{
