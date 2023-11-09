@@ -37,6 +37,7 @@ public class AmmoScript : MonoBehaviour
 
     public void insertMag(XRBaseInteractable interactable)
 	{
+       
         minusWhenPullSlide = false;
         myBarrelFixScript.canSlide = false;
         myBarrelFixScript.canShoot = false;
@@ -49,6 +50,7 @@ public class AmmoScript : MonoBehaviour
 	}
     public void removeMag(XRBaseInteractable interactable)
     {
+        magazine.myCollider.enabled = true;
         minusWhenPullSlide = true;
         magazine.numOfBullet = ammo - 1;
         if (ammo > 0)
@@ -94,7 +96,13 @@ public class AmmoScript : MonoBehaviour
     void Update()
     {
      
-     
+     if (myGrab.isSelected == true && magazine != null)
+		{
+            magazine.myCollider.enabled = true;
+        } else
+		{
+            magazine.myCollider.enabled = false;
+        }
         if (myBarrelFixScript.canSlide == true && myIsSlided == false)
         {
             slideAudio();

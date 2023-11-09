@@ -148,7 +148,7 @@ public class ObjectForHolster : MonoBehaviour
 
 
         GrabRelease();
-
+        
         
         if (ReleasedInHolster == true && inHolster == true) //HolsterObject != null &&
         {

@@ -17,7 +17,7 @@ public class TrollyButtonScript : MonoBehaviour
 	private float trollyStageFloat;
 
 
-
+	
 
 	public TrollyStage myTrollyStageScript;
 

@@ -13,7 +13,7 @@ public class Magazine : MonoBehaviour
 
 	private XRGrabInteractable myGrab;
 
-	private Collider myCollider;
+	public Collider myCollider;
 
 	public XRSocketInteractTag myScoket;
 
@@ -27,6 +27,7 @@ public class Magazine : MonoBehaviour
 	void Start()
 	{
 		myGrab = gameObject.GetComponent<XRGrabInteractable>();
+		
 		myCollider = gameObject.GetComponent<Collider>();
 		magRB = gameObject.GetComponent<Rigidbody>();
 	}
@@ -65,7 +66,8 @@ public class Magazine : MonoBehaviour
 			{
 				Debug.Log("Loaded?");
 				myAmmoScript.ammo = numOfBullet; 
-				isLoaded = true;	
+				isLoaded = true;
+				
 			}
 
 		}
