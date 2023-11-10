@@ -27,7 +27,7 @@ public class AmmoScript : MonoBehaviour
 
     public BarrelFix myBarrelFixScript;
 
-    private bool isInserted;
+    public bool isInserted;
 
     public bool myIsSlided;
     public bool minusWhenPullSlide;
@@ -35,9 +35,11 @@ public class AmmoScript : MonoBehaviour
     private float timer;
     public float shootDelay;
 
-    public void insertMag(XRBaseInteractable interactable)
+
+    private GameObject mag;
+    public void insertMag(XRBaseInteractable interactable) // make mag child of gun so it won't move 
 	{
-       
+        mag = interactable.GetComponent<GameObject>();
         minusWhenPullSlide = false;
         myBarrelFixScript.canSlide = false;
         myBarrelFixScript.canShoot = false;
@@ -47,6 +49,7 @@ public class AmmoScript : MonoBehaviour
         isInserted = true;
         Source.PlayOneShot(magEnter);
         Debug.Log("L");
+        mag.transform.SetParent(gameObject.transform);
 	}
     public void removeMag(XRBaseInteractable interactable)
     {
@@ -83,6 +86,10 @@ public class AmmoScript : MonoBehaviour
        
         if (ammo > 0)
 		{
+            if (magazine != null)
+			{
+                magazine.numOfBullet--;
+			}
             shootScript.raycastShoot();
             ammo--;
             Source.PlayOneShot(shootAudio);
@@ -111,7 +118,7 @@ public class AmmoScript : MonoBehaviour
 			{
                 ammo--;
 			}
-            if (ammo > 1 && magazine.isLoaded == true)
+            else if (ammo > 1 && magazine.isLoaded == true)
 			{
                 magazine.numOfBullet--;
 			}

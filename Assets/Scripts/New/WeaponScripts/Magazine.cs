@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Magazine : MonoBehaviour
 {
 
-    public int numOfBullet = 16;
+    public int numOfBullet;
 	public AmmoScript myAmmoScript;
 	public BarrelFix myBarrelFixScript;
 
@@ -60,7 +60,7 @@ public class Magazine : MonoBehaviour
 	void Update()
 	{
 		
-		if (isEmpty == true)
+		if (myAmmoScript.isInserted == true)
 		{
 			if (myBarrelFixScript.canShoot == true && isLoaded == false)
 			{
@@ -69,7 +69,6 @@ public class Magazine : MonoBehaviour
 				isLoaded = true;
 				
 			}
-
 		}
 	}
 }
