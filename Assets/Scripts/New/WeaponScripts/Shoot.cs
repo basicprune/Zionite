@@ -11,7 +11,8 @@ public class Shoot : MonoBehaviour
 
 	public InputAction raycastTestInput;
 	public AudioClip targetHitSound;
-	
+	public RagDoll myRagDollScript;
+	public GameObject EnemyObject;
 	public void Start()
 	{
 		raycastTestInput.Enable();
@@ -41,18 +42,29 @@ public class Shoot : MonoBehaviour
 				//Destroy(tempBulletMark, 30.0f);
 			}else if (hit.collider.gameObject.tag == "Head")
 			{
-				GameObject EnemyObject = hit.collider.gameObject;
-				RagDoll myRagDollScript = EnemyObject.GetComponentInParent<RagDoll>();
+				EnemyNavMeshNew navMeshScript = hit.collider.gameObject.GetComponentInParent<EnemyNavMeshNew>();
+				Animator enemyAnimator = hit.collider.gameObject.GetComponentInParent<Animator>();
+				enemyAnimator.enabled = false;
+				navMeshScript.enabled = false;
+			    EnemyObject = hit.collider.gameObject;
+				myRagDollScript = hit.collider.gameObject.GetComponentInParent<RagDoll>();
+				Debug.Log(myRagDollScript.enemyRB.Count);
 				foreach (Rigidbody rb in myRagDollScript.enemyRB)
 				{
 					rb.isKinematic = false;
 				}
+			}else if (hit.collider.gameObject.tag != "Head")
+			{
+				EnemyObject = null;
+				myRagDollScript = null;
 			}
-
+			
+			Debug.Log(hit.collider.tag);
 		}
 	}
 	public void Update()
 	{
+		
 		if (raycastTestInput.WasPressedThisFrame() == true)
 		{
 			raycastShoot();

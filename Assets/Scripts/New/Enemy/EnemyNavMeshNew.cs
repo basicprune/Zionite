@@ -18,9 +18,11 @@ public class EnemyNavMeshNew : MonoBehaviour
     public bool myDistance;
 
     public FieldOfView myFieldOfViewScript;
+    private Animator myAnimitor;
     // Start is called before the first frame update
     void Start()
     {
+        myAnimitor = gameObject.GetComponent<Animator>();
         myAgent = gameObject.GetComponent<NavMeshAgent>();
         myAgent.speed = myAgentSpeed;
     }
@@ -41,7 +43,7 @@ public class EnemyNavMeshNew : MonoBehaviour
     }
     public void aiNav()
 	{
-      
+        
         myAgent.speed = myAgentSpeed;
         if (canSeePlayer == true)
         {
@@ -58,6 +60,7 @@ public class EnemyNavMeshNew : MonoBehaviour
             }
             if (myAgent.remainingDistance <= myAgent.stoppingDistance)
             {
+                myAnimitor.Play("Run");
                 Vector3 point;
                 if (RandomPoint(myAgent.transform.position, walkRadius, out point))
                 {
@@ -74,12 +77,12 @@ public class EnemyNavMeshNew : MonoBehaviour
        if (myFieldOfViewScript.visibleTargets.Count != 0)
 		{
             canSeePlayer = true;
-            Debug.Log(myFieldOfViewScript.target.transform.position);
+           // Debug.Log(myFieldOfViewScript.target.transform.position);
         } else
 		{
             canSeePlayer = false;
 		}
-        Debug.Log(myFieldOfViewScript.visibleTargets.Count);
+        //Debug.Log(myFieldOfViewScript.visibleTargets.Count);
        
         aiNav();
     }
