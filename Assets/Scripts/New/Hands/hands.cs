@@ -22,6 +22,7 @@ public class hands : MonoBehaviour
     }
 	public void ShowandHideHand()
 	{
+        
         if (gunGrabbed.isSelected == true && hand.active == false)
 		{
             hand.active = true;

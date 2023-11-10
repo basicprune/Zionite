@@ -11,6 +11,7 @@ public class Shoot : MonoBehaviour
 
 	public InputAction raycastTestInput;
 	public AudioClip targetHitSound;
+	
 	public void Start()
 	{
 		raycastTestInput.Enable();
@@ -21,7 +22,7 @@ public class Shoot : MonoBehaviour
 		
 		if (Physics.Raycast(gunEnd.transform.position, gunEnd.transform.forward, out hit, 150f))
 		{
-			Debug.Log(hit.collider.gameObject.name);
+			//Debug.Log(hit.collider.gameObject.name);
 			Debug.Log(hit.collider.tag);
 			if (hit.collider.tag == "Enemy")
 			{
@@ -38,7 +39,16 @@ public class Shoot : MonoBehaviour
 				targetSource.PlayOneShot(targetHitSound);
 
 				//Destroy(tempBulletMark, 30.0f);
+			}else if (hit.collider.gameObject.tag == "Head")
+			{
+				GameObject EnemyObject = hit.collider.gameObject;
+				RagDoll myRagDollScript = EnemyObject.GetComponentInParent<RagDoll>();
+				foreach (Rigidbody rb in myRagDollScript.enemyRB)
+				{
+					rb.isKinematic = false;
+				}
 			}
+
 		}
 	}
 	public void Update()

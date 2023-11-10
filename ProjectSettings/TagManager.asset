@@ -11,6 +11,10 @@ TagManager:
   - HolsterItemTag
   - Target
   - TrollyButton
+  - Head
+  - Body
+  - Leg
+  - arm
   layers:
   - Default
   - TransparentFX
