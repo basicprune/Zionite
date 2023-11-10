@@ -14,6 +14,8 @@ public class FieldOfView : MonoBehaviour {
 	[HideInInspector]
 	public List<Transform> visibleTargets = new List<Transform>();
 
+	public Transform target;
+
 	void Start() {
 		StartCoroutine ("FindTargetsWithDelay", .2f);
 	}
@@ -31,7 +33,7 @@ public class FieldOfView : MonoBehaviour {
 		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
 
 		for (int i = 0; i < targetsInViewRadius.Length; i++) {
-			Transform target = targetsInViewRadius [i].transform;
+			target = targetsInViewRadius [i].transform;
 			Vector3 dirToTarget = (target.position - transform.position).normalized;
 			if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) {
 				float dstToTarget = Vector3.Distance (transform.position, target.position);

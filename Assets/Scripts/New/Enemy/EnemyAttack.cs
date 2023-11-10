@@ -11,7 +11,7 @@ public class EnemyAttack : MonoBehaviour
 	private GameObject[] objects;
 	public float speed;
 
-	public EnemyNavMesh enemyNavMeshScript;
+	public EnemyNavMeshNew enemyNavMeshScript;
 
 	public GameObject RayCastShoot;
 
@@ -26,7 +26,7 @@ public class EnemyAttack : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		enemyNavMeshScript = EnemyParent.GetComponent<EnemyNavMesh>();
+		enemyNavMeshScript = EnemyParent.GetComponent<EnemyNavMeshNew>();
 		
     }
 	private void OnTriggerEnter(Collider other)

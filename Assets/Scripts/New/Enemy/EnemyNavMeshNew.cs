@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyNavMesh : MonoBehaviour
+public class EnemyNavMeshNew : MonoBehaviour
 {
     public GameObject floor;
     private NavMeshAgent myAgent;
@@ -16,6 +16,8 @@ public class EnemyNavMesh : MonoBehaviour
     public bool canSeePlayer;
 
     public bool myDistance;
+
+    public FieldOfView myFieldOfViewScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +41,11 @@ public class EnemyNavMesh : MonoBehaviour
     }
     public void aiNav()
 	{
+      
         myAgent.speed = myAgentSpeed;
         if (canSeePlayer == true)
         {
-            myAgent.destination = myPlayer.transform.position;
+            myAgent.destination = myFieldOfViewScript.target.transform.position;
             myDistance = true;
         }
         else
@@ -68,6 +71,16 @@ public class EnemyNavMesh : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if (myFieldOfViewScript.visibleTargets.Count != 0)
+		{
+            canSeePlayer = true;
+            Debug.Log(myFieldOfViewScript.target.transform.position);
+        } else
+		{
+            canSeePlayer = false;
+		}
+        Debug.Log(myFieldOfViewScript.visibleTargets.Count);
+       
         aiNav();
     }
 }
