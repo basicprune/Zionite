@@ -35,6 +35,7 @@ public class AmmoScript : MonoBehaviour
     private float timer;
     public float shootDelay;
 
+    public ParticleSystem gunFlash;
 
     private GameObject mag;
     public void insertMag(XRBaseInteractable interactable) // make mag child of gun so it won't move 
@@ -93,6 +94,7 @@ public class AmmoScript : MonoBehaviour
             shootScript.raycastShoot();
             ammo--;
             Source.PlayOneShot(shootAudio);
+            gunFlash.Play();
         }
          
 	}

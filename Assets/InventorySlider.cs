@@ -64,6 +64,7 @@ public class InventorySlider : MonoBehaviour
     }
     public void scrollRight() // if i scroll right then minus 1 if // the window on the righter most side is the higher in and the left is the lower
 	{
+        Debug.Log("RightSlide");
         if (invWindow == 3)
         {
             invWindow = 2;

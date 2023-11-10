@@ -15,6 +15,8 @@ TagManager:
   - Body
   - Leg
   - arm
+  - InventoryScrollButtonLeft
+  - InventoryScrollButtonRight
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - TrollyButton
   - Handle
   - Gun
-  - 
+  - InventoryHandles
   - 
   - 
   - 

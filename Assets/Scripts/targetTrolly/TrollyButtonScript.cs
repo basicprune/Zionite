@@ -185,6 +185,6 @@ public class TrollyButtonScript : MonoBehaviour
 		{
 			TrollyHalf();
 		}
-		Debug.Log(myTrollyStageScript.myStageInt); // change so it check a string on the TrollyButtonInteractor.cs for the right or left controller and then only allow for right trigger if string == right :)
+		//Debug.Log(myTrollyStageScript.myStageInt); // change so it check a string on the TrollyButtonInteractor.cs for the right or left controller and then only allow for right trigger if string == right :)
 	}
 }

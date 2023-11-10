@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Shoot : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public class Shoot : MonoBehaviour
 	public void Start()
 	{
 		raycastTestInput.Enable();
+		
 	}
+
 	public void raycastShoot()
 	{
+	
 		RaycastHit hit;
 		
 		if (Physics.Raycast(gunEnd.transform.position, gunEnd.transform.forward, out hit, 150f))
@@ -40,7 +44,7 @@ public class Shoot : MonoBehaviour
 				targetSource.PlayOneShot(targetHitSound);
 
 				//Destroy(tempBulletMark, 30.0f);
-			}else if (hit.collider.gameObject.tag == "Head")
+			}else if (hit.collider.gameObject.tag == "Head" || hit.collider.gameObject.tag == "Body" || hit.collider.gameObject.tag == "Leg" || hit.collider.gameObject.tag == "Arm")
 			{
 				EnemyNavMeshNew navMeshScript = hit.collider.gameObject.GetComponentInParent<EnemyNavMeshNew>();
 				Animator enemyAnimator = hit.collider.gameObject.GetComponentInParent<Animator>();
