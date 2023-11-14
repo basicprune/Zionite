@@ -6,16 +6,22 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 public class AmmoScript : MonoBehaviour
 {
+    public GameObject magParent;
+
     public Shoot shootScript;
     public XRSocketInteractor mySocket;
+
+    public ActionBasedController ActionBasedController;
 
     private XRGrabInteractable myGrab;
 
     public Text ammoText;
     public int ammo;
 
-    public InputActionReference RTrigger;
+    //public InputActionReference RTrigger;
     public InputAction RTriggers;
+
+    public InputActionProperty myinputActionPropertyTest;
 
     public AudioSource Source;
 
@@ -38,6 +44,18 @@ public class AmmoScript : MonoBehaviour
     public ParticleSystem gunFlash;
 
     private GameObject mag;
+    public XRGrabInteractable grabInteractable;
+ 
+   
+    void Start()
+    {
+        myGrab = gameObject.GetComponent<XRGrabInteractable>();
+        mySocket.onSelectEntered.AddListener(insertMag);
+        mySocket.onSelectExited.AddListener(removeMag);
+    }
+
+   
+
     public void insertMag(XRBaseInteractable interactable) // make mag child of gun so it won't move 
 	{
         mag = interactable.GetComponent<GameObject>();
@@ -50,10 +68,11 @@ public class AmmoScript : MonoBehaviour
         isInserted = true;
         Source.PlayOneShot(magEnter);
         Debug.Log("L");
-        mag.transform.SetParent(gameObject.transform);
+        //mag.transform.SetParent(gameObject.transform);
 	}
     public void removeMag(XRBaseInteractable interactable)
     {
+       
         magazine.myCollider.enabled = true;
         minusWhenPullSlide = true;
         magazine.numOfBullet = ammo - 1;
@@ -64,8 +83,8 @@ public class AmmoScript : MonoBehaviour
         isInserted = false;
         myBarrelFixScript.canShoot = false;
         myBarrelFixScript.run = false;
+        //mag.transform.SetParent(magParent.transform);
 
-        magazine = null;
         Source.PlayOneShot(magEnter);
     }
     public void slideAudio()
@@ -73,19 +92,11 @@ public class AmmoScript : MonoBehaviour
         Source.PlayOneShot(slide);
     }
 
-    void Start()
-    {
-        myGrab = gameObject.GetComponent<XRGrabInteractable>();
-        
 
-        mySocket.onSelectEntered.AddListener(insertMag);
-        mySocket.onSelectExited.AddListener(removeMag);
-        
-    }
     public void Shoot()
 	{
        
-        if (ammo > 0)
+        if (magazine.numOfBullet > 0)
 		{
             if (magazine != null)
 			{
@@ -98,8 +109,8 @@ public class AmmoScript : MonoBehaviour
         }
          
 	}
-        
-    
+
+ 
 
     // Update is called once per frame
     void Update()
@@ -142,6 +153,8 @@ public class AmmoScript : MonoBehaviour
                 Debug.Log("PRSSED");
             }
         }
+        ActionBasedController.selectAction = myinputActionPropertyTest;
         
+       
     }
 }
